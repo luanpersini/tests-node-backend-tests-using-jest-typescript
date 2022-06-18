@@ -1,0 +1,14 @@
+POST http://localhost:3003/register
+content-type: application/json
+
+{
+    "name": "Test name",
+    "email": "email@email.com",
+    "age": 9,
+    "address": {
+       "country": "BR",
+       "zipCode": "1234567"
+    }
+}
+
+###
