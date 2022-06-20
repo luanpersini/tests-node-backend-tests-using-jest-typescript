@@ -1,5 +1,6 @@
 import { CreateAccountDto } from '../../domain/dto/createAccount.dto'
 import { EnumCountry } from '../../domain/enums/EnumCountry'
+import { authenticationClientMock } from '../../../../infrastructure/__tests__/clients/authenticationClientMock'
 
 export const addressMock = {
   country: EnumCountry.BR,
@@ -13,3 +14,10 @@ export const createAccountDtoMock: CreateAccountDto = {
   address: addressMock
 }
 
+export const authenticationServiceMock: any = {
+  createAccount: jest.fn(),
+  authenticationClient: authenticationClientMock,
+  validateZipCode: function (body: CreateAccountDto): void {
+    jest.fn()
+  }
+}

@@ -13,13 +13,11 @@ import { createAccountDtoMock } from './mocks/authentication.mocks'
 let sut: AuthenticationService
 let createAccountDto: CreateAccountDto
 let account: any
-let spyValidateZipCode: any
-
-const token = 'anyToken'
 
 const makeSut = () => {
   sut = new AuthenticationService(authenticationClientMock)
   jest.spyOn(authenticationClientMock, 'getAccountByEmail')
+  jest.spyOn(authenticationClientMock, 'getAllAccounts')  
 }
 
 describe(`Authentication Service`, () => {
@@ -48,7 +46,7 @@ describe(`Authentication Service`, () => {
     })
 
     test('should throw Error if account already exists', async () => {
-      jest.spyOn(authenticationClientMock, 'getAccountByEmail').mockResolvedValueOnce(createAccountDto)
+      jest.spyOn(authenticationClientMock, 'getAccountByEmail').mockResolvedValueOnce(account)
 
       await expect(execSut()).rejects.toThrowError(new BadRequestException(new ItemAlreadyExistsError('Account', 'Email')))
     })
@@ -62,12 +60,11 @@ describe(`Authentication Service`, () => {
       expect(authenticationClientMock.createAccount).toHaveBeenCalledWith(account)
     })
 
-    test('should return a token on sut.CreateAccount success', async () => {
-      jest.spyOn(authenticationClientMock, 'createAccount').mockResolvedValueOnce(token)
-
+    test('should return the created account on success', async () => {
+      jest.spyOn(authenticationClientMock, 'createAccount').mockResolvedValueOnce(account)
       const result = await execSut()
 
-      expect(result).toBe(token)
+      expect(result).toBe(account)
     })
   }) //End Create Account
 
@@ -95,6 +92,16 @@ describe(`Authentication Service`, () => {
       }
     })
   }) //End Validate ZipCode
+
+  describe(`getAllAccounts`, () => {
+    const execSut = () => sut.getAllAccounts()
+
+    test('should call authenticationClient.getAllAccounts', async () => { 
+      await execSut()
+
+      expect(authenticationClientMock.getAllAccounts).toHaveBeenCalledTimes(1)
+    })
+  }) //End getAllAccounts
 
   describe(`Simulated Tests`, () => {
     test('simulated test - should throw (Sync Error) if a syncronous function throws', async () => {

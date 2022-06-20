@@ -33,7 +33,7 @@ export function standardDtoTests(testParams: any, dataFactory: any, requestFacto
     test.each(testParams['IsOptional'])('should return **Ok** if param is optional and is missing (%p)', async (p) => {
       unset(requestData, p)
 
-      const { status, body } = await execSut()
+      const { status } = await execSut()
       expect(status).toBe(okStatus)
     })
   }
@@ -61,7 +61,7 @@ export function standardDtoTests(testParams: any, dataFactory: any, requestFacto
     test.each(testParams['IsNumber'])('should return **Bad Request** if param is not an number (%p)', async (p) => {
       set(requestData, p, 'not_an_number')
 
-      await actAssert(`${p} must be a number conforming to the specified constraints`)      
+      await actAssert(`${p} must be a number conforming to the specified constraints`)
     })
   }
 
@@ -96,23 +96,25 @@ export function standardDtoTests(testParams: any, dataFactory: any, requestFacto
     test.each(testParams['IsISO8601'])('should return **Bad Request** if param is not an Date format ISO8601 (%p)', async (p) => {
       set(requestData, p, 'not_a_ISO8601')
 
-      await actAssert('')
+      await actAssert(`${p} must be a valid ISO 8601 date string`)
     })
   }
 
   if (testParams['IsObject']) {
     test.each(testParams['IsObject'])(`should return **Bad Request** if param is not an object (%p)`, async (p) => {
-      set(requestData, p, 'not_an_object')
+      set(requestData, p, [])
 
-      await actAssert('')
+      await actAssert(`${p} must be an object`)
     })
   }
 
   if (testParams['IsNotEmptyObject']) {
     test.each(testParams['IsNotEmptyObject'])(`should return **Bad Request** if param is an empty object (%p)`, async (p) => {
       set(requestData, p, {})
-
-      await actAssert('')
+      
+      // The message cant be guessed because of nested objects validation. In any case, it will return bad request. 
+      const { status } = await execSut()
+      expect(status).toBe(400)
     })
   }
 

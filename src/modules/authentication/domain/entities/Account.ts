@@ -2,8 +2,8 @@ import { Address } from '../interfaces/Address'
 
 export class Account {
   private name: string
-  private email: string
-  private age: string
+  public email: string
+  private age: number
   public address: Address
   
   constructor({ name, email, age, address }) {

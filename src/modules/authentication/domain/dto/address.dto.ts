@@ -10,8 +10,8 @@ export class AddressDto {
   @IsEnum(EnumCountry)
   country: string
 
-  @IsString()
   @IsOptional()
+  @IsString()  
   @IsNotEmpty()
   @IsNumberString()
   @Length(8,8, {message: zipCodeLenghtMessage}) 
