@@ -76,12 +76,22 @@ Some concepts and tips to have in mind when writting tests:
 
 - Validate only one scenario per test: minimize the number of asserts
 - Tests should be Stateless: all elements in a test should return to the initial state after each test.
-- **F.I.R.S.T**
-    - **F**ast - test should be fast. When tests run slow, you won’t want to run them frequently.
-    - **I**ndependent - Tests should not depend on each other. Tests should be able to run in any order.
-    - **R**epeatable - Tests should be repeatable in any environment. If your test aren’t repeatable in any environment, then you’ll always have an excuse for why they fail.
-    - **S**elf-Validating - Tests should have a boolean output. You should not have to read through a log file to tell whether the tests pass.
-    - **T**imely - Tests need to be written in a timely fashion. Unit test should be written just before the production code. If you write tests after the production code, then you may find the production code to be hard to test
+
+</br>
+
+**Arrange > Act > Assert**
+- Arrange – setup the test required elements (variables, objects, databases, mocks, spies, etc)
+- Act – perform the action that will generate the behavior that will be tested
+- Assert – verify the result of the action
+
+</br>
+
+**F.I.R.S.T**
+- **F**ast - test should be fast. When tests run slow, you won’t want to run them frequently.
+- **I**ndependent - Tests should not depend on each other. Tests should be able to run in any order.
+- **R**epeatable - Tests should be repeatable in any environment. If your test aren’t repeatable in any environment, then you’ll always have an excuse for why they fail.
+- **S**elf-Validating - Tests should have a boolean output. You should not have to read through a log file to tell whether the tests pass.
+- **T**imely - Tests need to be written in a timely fashion. Unit test should be written just before the production code. If you write tests after the production code, then you may find the production code to be hard to test
 
 </br>
 
