@@ -82,9 +82,10 @@ Some concepts and tips to have in mind when writting tests:
     - **R**epeatable - Tests should be repeatable in any environment. If your test aren’t repeatable in any environment, then you’ll always have an excuse for why they fail.
     - **S**elf-Validating - Tests should have a boolean output. You should not have to read through a log file to tell whether the tests pass.
     - **T**imely - Tests need to be written in a timely fashion. Unit test should be written just before the production code. If you write tests after the production code, then you may find the production code to be hard to test
-- Have fun making tests :sunglasses:
 
+</br>
 
+Have fun making tests :sunglasses:
 ## Unit Tests
 
 Unit tests are focused on testing the logic path inside a code unit. This unit is usually a method. Tests should have none or just a few external dependencies. Most dependencies can be simulated through mocks. 
@@ -97,6 +98,7 @@ Some tips:
 2. There is no need to always mock everything. If creating the mock demands a lot of effort and time, then it might be better to use the functionality directly.
 3. It's not necessary to create unit tests for all external dependencies. If you don't trust them, then you shouldn't be using them. But, if it's a critical area of your software, go ahead.
 4. The % percentage of coverage should not be the sole reference guiding a test strategy. Real code coverage will only be reached if item 1 from this list is followed.
+
 
 
 
