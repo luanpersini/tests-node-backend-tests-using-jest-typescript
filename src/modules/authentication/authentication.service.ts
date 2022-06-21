@@ -28,7 +28,7 @@ export class AuthenticationService {
       return
     }
     const { zipCode } = body.address
-    if (zipCode === '99999999') {
+    if (zipCode === '99999999') { 
       throw new BadRequestException('Invalid ZipCode')
     }
   }

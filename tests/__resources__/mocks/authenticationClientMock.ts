@@ -1,6 +1,6 @@
-import { account1, account2 } from '../../clients/AuthenticationClient'
+import { account1, account2 } from '../../../src/infrastructure/clients/AuthenticationClient'
 
-import { IAuthenticationClient } from '../../clients/IAuthenticationClient'
+import { IAuthenticationClient } from '../../../src/infrastructure/clients/IAuthenticationClient'
 
 export const authenticationClientMock: IAuthenticationClient = {
   createAccount: jest.fn(),

@@ -1,6 +1,6 @@
-import { CreateAccountDto } from '../../domain/dto/createAccount.dto'
-import { EnumCountry } from '../../domain/enums/EnumCountry'
-import { authenticationClientMock } from '../../../../infrastructure/__tests__/clients/authenticationClientMock'
+import { CreateAccountDto } from '../../../src/modules/authentication/domain/dto/createAccount.dto'
+import { EnumCountry } from '../../../src/modules/authentication/domain/enums/EnumCountry'
+import { authenticationClientMock } from './authenticationClientMock'
 
 export const addressMock = {
   country: EnumCountry.BR,

@@ -14,7 +14,8 @@
     "test:cov": "npm test -- --coverage",
     "test:debug": "node --inspect-brk -r tsconfig-paths/register -r ts-node/register node_modules/.bin/jest --runInBand",
     "test:unit": "npm test -- --watch --runInBand -c jest-unit-config.js",
-    "test:e2e": "npm run prebuild & npm test -- --watchAll --config ./tests/jest-e2e.json",
+    "test:int": "npm test -- --watch --runInBand -c jest-integration-config.js",
+    "test:e2e": "npm run prebuild & npm test -- --watchAll --verbose --config ./tests/jest-e2e.json",
     "clear:jest": "jest --clearCache"
   },
   "dependencies": {

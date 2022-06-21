@@ -36,7 +36,7 @@ const initServer = async () => {
   await app.init()
 }
 
-describe('Register End-To-End Tests', () => {
+describe('Authentication End-To-End Tests', () => {
   beforeEach(async () => {
     await initServer()    
   })
@@ -44,7 +44,7 @@ describe('Register End-To-End Tests', () => {
     await app.close()
   })
 
-  describe('/Register', () => {
+  describe('/getallaccounts', () => {
     describe('Business Rules', () => {
       test('should return **OK** with an array containing all the accounts on success', async () => {
         const { status, body } = await execSut()
@@ -54,11 +54,3 @@ describe('Register End-To-End Tests', () => {
     })
   })
 })
-
-// If you dont have automated tests in your pipeline, you can run tests in every environment server using a local machine as the point of origin
-// const servers = {
-//   local: `localhost:3003`,
-//   dev: 'https://dev.myservice.com',
-//   homolog: 'https://hml..myservice.com',
-// };
-// server = servers.local;

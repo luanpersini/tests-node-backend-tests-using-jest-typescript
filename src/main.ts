@@ -14,7 +14,7 @@ async function bootstrap() {
     new ValidationPipe({
       whitelist: true
     })
-  ) 
+  )
   await app.listen(port)
 }
 

@@ -1,10 +1,10 @@
 /* eslint-disable @typescript-eslint/no-empty-function */
 
-import { AuthenticationController } from '../authentication.controller'
-import { AuthenticationService } from '../authentication.service'
-import { CreateAccountDto } from '../domain/dto/createAccount.dto'
-import { authenticationClientMock } from '../../../infrastructure/__tests__/clients/authenticationClientMock'
-import { createAccountDtoMock } from './mocks/authentication.mocks'
+import { AuthenticationController } from '../../../src/modules/authentication/authentication.controller'
+import { AuthenticationService } from '../../../src/modules/authentication/authentication.service'
+import { CreateAccountDto } from '../../../src/modules/authentication/domain/dto/createAccount.dto'
+import { authenticationClientMock } from '../../__resources__/mocks/authenticationClientMock'
+import { createAccountDtoMock } from '../../__resources__/mocks/authentication.mocks'
 
 let sut: AuthenticationController
 let createAccountDto: CreateAccountDto

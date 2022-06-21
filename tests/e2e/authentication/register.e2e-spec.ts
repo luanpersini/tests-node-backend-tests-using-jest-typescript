@@ -9,8 +9,8 @@ import { ItemAlreadyExistsError } from '../../../src/api/errors/itemAlreadyExist
 import { Server } from 'http'
 import { Test } from '@nestjs/testing'
 import { faker } from '@faker-js/faker'
-import { makeDtoTestParams } from '../../testHelpers/dtoTestParamsFactory'
-import { standardDtoTests } from '../../testHelpers/standardDtoTests'
+import { makeDtoTestParams } from '../../__resources__/testHelpers/dtoTestParamsFactory'
+import { standardDtoTests } from '../../__resources__/testHelpers/standardDtoTests'
 import { zipCodeLenghtMessage } from '../../../src/modules/authentication/domain/dto/address.dto'
 
 // SUT = Subject Under Test
@@ -53,7 +53,7 @@ const actAssert = async (message: string) => {
   expect(status).toBe(400)
 }
 
-describe('Register End-To-End Tests', () => {
+describe('Authentication End-To-End Tests', () => {
   beforeEach(async () => {
     await initServer()
     requestData = makeCreateAccountRequestData()
@@ -63,7 +63,7 @@ describe('Register End-To-End Tests', () => {
     await app.close()
   })
 
-  describe('/Register', () => {
+  describe('/register', () => {
     describe('Business Rules', () => {
       test('should return **BadRequest** if zipCode is invalid (address.zipCode = 99999999)', async () => {
         requestData.address.zipCode = '99999999'
@@ -105,11 +105,3 @@ describe('Register End-To-End Tests', () => {
     })
   })
 })
-
-// If you dont have automated tests in your pipeline, you can run tests in every environment server using a local machine as the point of origin
-// const servers = {
-//   local: `localhost:3003`,
-//   dev: 'https://dev.myservice.com',
-//   homolog: 'https://hml..myservice.com',
-// };
-// server = servers.local;

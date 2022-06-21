@@ -3,7 +3,7 @@ import { EnumCountry } from '../../modules/authentication/domain/enums/EnumCount
 import { IAuthenticationClient } from './IAuthenticationClient'
 import { Injectable } from '@nestjs/common'
 
-export const createAccountDtoMock1 = {
+export const accountAuthClientMock1 = {
   name: 'Name One',
   email: 'one@mail.com', 
   age: 11,
@@ -13,7 +13,7 @@ export const createAccountDtoMock1 = {
   }
 }
 
-export const createAccountDtoMock2 = {
+export const accountAuthClientMock2 = {
   name: 'Name Two',
   email: 'two@mail.com',  
   age: 22,
@@ -22,8 +22,8 @@ export const createAccountDtoMock2 = {
   }
 }
 
-export const account1 = new Account(createAccountDtoMock1)
-export const account2 = new Account(createAccountDtoMock2)
+export const account1 = new Account(accountAuthClientMock1)
+export const account2 = new Account(accountAuthClientMock2)
 
 //fake client that would make requests to a third party authentication API
 const accounts: Array<Account> = [account1, account2]
@@ -41,9 +41,14 @@ export class AuthenticationClient implements IAuthenticationClient {
     return account
   }
 
-  async deleteAccountByEmail(email: string): Promise<void> {
-    const accountExists = await this.getAccountByEmail(email)
+  async deleteAccountByEmail(email: string): Promise<boolean> {
+    const accountExists = await this.getAccountByEmail(email)   
+    if(!accountExists){
+      return false      
+    }
+
     accounts.splice(accounts.indexOf(accountExists), 1)
+    return true    
   }
 
   async getAllAccounts(): Promise<Array<Account>> {

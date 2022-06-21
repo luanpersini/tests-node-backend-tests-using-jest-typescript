@@ -1,14 +1,14 @@
 /* eslint-disable @typescript-eslint/no-empty-function */
 
-import { throwError, throwReject } from '../../../../tests/testHelpers/testHelper'
+import { throwError, throwReject } from '../../__resources__/testHelpers/testHelper'
 
-import { Account } from '../domain/entities/Account'
-import { AuthenticationService } from '../authentication.service'
+import { Account } from '../../../src/modules/authentication/domain/entities/Account'
+import { AuthenticationService } from '../../../src/modules/authentication/authentication.service'
 import { BadRequestException } from '@nestjs/common'
-import { CreateAccountDto } from '../domain/dto/createAccount.dto'
-import { ItemAlreadyExistsError } from '../../../api/errors/itemAlreadyExists.error'
-import { authenticationClientMock } from '@infrastructure/__tests__/clients/authenticationClientMock'
-import { createAccountDtoMock } from './mocks/authentication.mocks'
+import { CreateAccountDto } from '../../../src/modules/authentication/domain/dto/createAccount.dto'
+import { ItemAlreadyExistsError } from '../../../src/api/errors/itemAlreadyExists.error'
+import { authenticationClientMock } from '../../__resources__/mocks/authenticationClientMock'
+import { createAccountDtoMock } from '../../__resources__/mocks/authentication.mocks'
 
 let sut: AuthenticationService
 let createAccountDto: CreateAccountDto
