@@ -95,8 +95,8 @@ If the test has too many dependencies, then an integration test may be better.
 Some tips:
 
 1. Check if the test covers all the logic of the method. Most tests should fail if you implement any change of logic inside the tested code, allowing the code to be refactored with fewer chances of creating bugs.
-2. There is no need to always mock everything. If creating the mock demands a lot of effort and time, then it might be better to use the functionality directly.
-3. It's not necessary to create unit tests for all external dependencies. If you don't trust them, then you shouldn't be using them. But, if it's a critical area of your software, go ahead.
+2. It's not necessary to always mock everything. If creating the mock demands too much effort and time, then it might be better to use the functionality directly.
+3. It's not necessary to create unit tests for all external dependencies. If you don't trust them, then you shouldn't be using them.
 4. The % percentage of coverage should not be the sole reference guiding a test strategy. Real code coverage will only be reached if item 1 from this list is followed.
 
 
