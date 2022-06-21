@@ -2,7 +2,7 @@
 
 # Objectives
 
-The main objective of this project is to keep it as a knowledge base about backend testing, including tips and test examples, covering the majority of the most common use cases with unit, integration and end-to-end tests.
+The main objective of this project is to keep it as a knowledge base about backend testing, including tips and test examples, covering the majority of the most common use cases with unit, integration, and end-to-end tests.
 
 **Application**
 
@@ -69,7 +69,23 @@ content-type: application/json
 
 </br>
 
-# Unit Tests
+
+# Tests
+
+Some concepts and tips to have in mind when writting tests:
+
+- Validate only one scenario per test: minimize the number of asserts
+- Tests should be Stateless: all elements in a test should return to the initial state after each test.
+- **F.I.R.S.T**
+    - **F**ast - test should be fast. When tests run slow, you won’t want to run them frequently.
+    - **I**ndependent - Tests should not depend on each other. Tests should be able to run in any order.
+    - **R**epeatable - Tests should be repeatable in any environment. If your test aren’t repeatable in any environment, then you’ll always have an excuse for why they fail.
+    - **S**elf-Validating - Tests should have a boolean output. You should not have to read through a log file to tell whether the tests pass.
+    - **T**imely - Tests need to be written in a timely fashion. Unit test should be written just before the production code. If you write tests after the production code, then you may find the production code to be hard to test
+- Have fun making tests :sunglasses:
+
+
+## Unit Tests
 
 Unit tests are focused on testing the logic path inside a code unit. This unit is usually a method. Tests should have none or just a few external dependencies. Most dependencies can be simulated through mocks. 
 
