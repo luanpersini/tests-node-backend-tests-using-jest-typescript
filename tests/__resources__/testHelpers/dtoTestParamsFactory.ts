@@ -48,8 +48,7 @@ export function makeDtoTestParams(dtoParams) {
 
   Object.entries(dtoParams).forEach(([dto, obj]) => {
     Object.keys(obj).forEach((param) => {
-      const classValidatorArray = obj[param]
-      // paramPath > nestedObject = nestedObject.code, without nestedobject = client_id 
+      const classValidatorArray = obj[param]      
       const paramPath = (dto !== '') ? dto + "." + param : param
       let elementValue: any = paramPath
 
@@ -57,7 +56,7 @@ export function makeDtoTestParams(dtoParams) {
         if (element.includes('.')) {
           const splitedElement = element.split(".")
           element = splitedElement[0]
-          elementValue = [paramPath, splitedElement[1]] // return ["MaxLength", "3"]
+          elementValue = [paramPath, splitedElement[1]] // ["MaxLength.3"] becomes ["MaxLength", "3"]
         }
 
         if (!dtoValidationParams[element]) dtoValidationParams[element] = [] //define the array if it doesnt exist to push

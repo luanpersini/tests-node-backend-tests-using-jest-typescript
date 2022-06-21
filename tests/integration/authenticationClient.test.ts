@@ -21,7 +21,7 @@ describe(`Authentication Client`, () => {
     account = new Account(createAccount)    
     makeSut()
   })
-
+  
   describe(`getAccountByEmail`, () => {
     const execSut = () => sut.getAccountByEmail(createAccount.email)
     
@@ -39,6 +39,7 @@ describe(`Authentication Client`, () => {
       expect(result).toBeUndefined()
     })
   }) //End getAccountByEmail 
+
 
   describe(`createAccount`, () => {
     const execSut = () => sut.createAccount(account)
@@ -59,6 +60,7 @@ describe(`Authentication Client`, () => {
     })
   }) //End createAccount
 
+
   describe(`getAllAccounts`, () => {
     const execSut = () => sut.getAllAccounts()
 
@@ -69,6 +71,7 @@ describe(`Authentication Client`, () => {
     })
   }) //End getAllAccounts
 
+  
   describe(`deleteAccountByEmail`, () => {
     const execSut = () => sut.deleteAccountByEmail(createAccount.email)
 
