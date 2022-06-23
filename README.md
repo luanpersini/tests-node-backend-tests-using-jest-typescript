@@ -116,7 +116,30 @@ In this example, if you change the logic or comment any block of code, the relat
 
 ![](docs/unit-test.jpg)
 
+</br>
+
+## Integration Tests
+
+Integration tests are very similar to unit tests, but they use the real implementation of the dependencies instead of mocks. They are important because the implementation of a software can change, containing breaking changes. If you mock everything, your tests wont fail and the bug might escape to production.
+
+Some examples of integration tests:
+
+- Test a repository + database interaction
+- Test a call to a external service
 
 
+</br>
 
+## End-To-End Tests (e2e)
 
+End-to-end tests are focused in testing a entire process flow.
+
+In APIs, that consist in making a request and getting the expected response depending in the scenario tested.
+
+E2E tests should cover all business rules and all validations. The business rules are usually in the usecases (services) and the validations in the controller. 
+
+Most of the business rules test scenarios are **returns** and **throws** in the usecase.
+
+Example:
+
+![](docs/e2e-business-rules.jpg)
