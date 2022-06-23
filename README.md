@@ -8,7 +8,7 @@ The main objective of this project is to keep it as a knowledge base about backe
 
 </br>
 
-The application is an authentication API where you call a third party authentication service (scr/infrasctructure/AuthenticationClient). A mock service was made for the authentication client. This app have an authentication route (/register), where a new account can be created and a route to retrieve all accounts (/getAllAccounts). 
+The application is an authentication API where you call a third party authentication service (scr/infrastructure/AuthenticationClient). A mock service was made for the authentication client. This app have an authentication route (/register), where a new account can be created and a route to retrieve all accounts (/getAllAccounts). 
 
 The main goal of the application was to include the usecases that i wanted to test.
 
@@ -72,7 +72,7 @@ content-type: application/json
 
 # Tests
 
-Some concepts and tips to have in mind when writting tests:
+Some concepts and tips to have in mind when writing tests:
 
 - Validate only one scenario per test: minimize the number of asserts
 - Tests should be Stateless: all elements in a test should return to the initial state after each test.
@@ -96,6 +96,7 @@ Some concepts and tips to have in mind when writting tests:
 </br>
 
 Have fun making tests :sunglasses:
+
 ## Unit Tests
 
 Unit tests are focused on testing the logic path inside a code unit. This unit is usually a method. Tests should have none or just a few external dependencies. Most dependencies can be simulated through mocks. 
@@ -109,6 +110,11 @@ Some tips:
 3. It's not necessary to create unit tests for all external dependencies. If you don't trust them, then you shouldn't be using them.
 4. The % percentage of coverage should not be the sole reference guiding a test strategy. Real code coverage will only be reached if item 1 from this list is followed.
 
+Unit test example:
+
+In this example, if you change the logic or comment any block of code, the related tests will fail.
+
+![](docs/unit-test.jpg)
 
 
 
