@@ -2,7 +2,7 @@ import { set, unset } from 'lodash'
 
 import { faker } from '@faker-js/faker'
 
-// NestJs Dto validation test helper. requestFactory is an Api call using supertest or other similar tool.
+// requestFactory is an Api call using supertest or other similar tool.
 
 export function standardDtoTests(testParams: any, dataFactory: any, requestFactory: any, dataFactoryParams?: any, status?: any) {
   let requestData: any
@@ -111,8 +111,8 @@ export function standardDtoTests(testParams: any, dataFactory: any, requestFacto
   if (testParams['IsNotEmptyObject']) {
     test.each(testParams['IsNotEmptyObject'])(`should return **Bad Request** if param is an empty object (%p)`, async (p) => {
       set(requestData, p, {})
-      
-      // The message cant be guessed because of nested objects validation. In any case, it will return bad request. 
+
+      // The message cant be guessed because of nested objects validation. In any case, it will return bad request.
       const { status } = await execSut()
       expect(status).toBe(400)
     })
