@@ -1,16 +1,14 @@
-# NestJS - NodeJS - Backend Testing
+# Backend Testing - NodeJS/NestJS APIs
 
 # Objectives
 
 The main objective of this project is to keep it as a knowledge base about backend testing, including tips and test examples, covering the majority of the most common use cases with unit, integration, and end-to-end tests.
 
-**Application**
-
 </br>
 
-The application is an authentication API where you call a third party authentication service (scr/infrastructure/AuthenticationClient). A mock service was made for the authentication client. This app have an authentication route (/register), where a new account can be created and a route to retrieve all accounts (/getAllAccounts). 
+**Application**
 
-The main goal of the application was to include the usecases that i wanted to test.
+The application is an authentication API with studies purpose only, where you call a third party authentication service (scr/infrastructure/AuthenticationClient). A fake service was made for the authentication client using an Array of Objects. This app has an authentication route (/register), where a new account can be created and a route to retrieve all accounts (/getAllAccounts). 
 
 
 ## Structure
