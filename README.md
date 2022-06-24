@@ -32,6 +32,7 @@ Test files:
 
 1. open the terminal and run the command of the chosen test type
 
+- `npm run test` - to run all tests
 - `npm run test:unit` - unit tests
 - `npm run test:int`  - integration tests
 - `npm run test:e2e`  - end to end tests

@@ -17,7 +17,7 @@ const makeSut = () => {
 
 describe(`Authentication Client`, () => {
   beforeEach(() => {
-    createAccount = accountAuthClientMock1  
+    createAccount = {...accountAuthClientMock1}  
     account = new Account(createAccount)    
     makeSut()
   })

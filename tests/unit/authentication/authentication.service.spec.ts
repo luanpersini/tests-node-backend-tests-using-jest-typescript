@@ -22,7 +22,7 @@ const makeSut = () => {
 
 describe(`Authentication Service`, () => {
   beforeEach(() => {
-    createAccountDto = createAccountDtoMock
+    createAccountDto = {...createAccountDtoMock}
 
     account = new Account(createAccountDto)
     makeSut()
