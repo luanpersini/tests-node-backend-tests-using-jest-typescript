@@ -38,6 +38,14 @@ export function standardDtoTests(testParams: any, dataFactory: any, requestFacto
     })
   }
 
+  if (testParams['IsNotEmpty']) {
+    test.each(testParams['IsNotEmpty'])('should return **Bad Request** if param is empty (%p)', async (p) => {
+        set(requestData, p, '')
+
+        await actAssert(`${p} should not be empty`)
+      })
+  }
+  
   if (testParams['IsEnum']) {
     test.each(testParams['IsEnum'])(
       'should return **Bad Request** if param doesnt exist in the ENUM definition (%p)',
@@ -116,6 +124,14 @@ export function standardDtoTests(testParams: any, dataFactory: any, requestFacto
       const { status } = await execSut()
       expect(status).toBe(400)
     })
+  }
+
+  if (testParams['IsEmail']) {
+    test.each(testParams['IsEmail'])('should return **Bad Request** if param is not an email (%p)', async (p) => {
+        set(requestData, p, 'not_an_email')
+
+        await actAssert(`${p} must be an email`)
+      })
   }
 
   if (testParams['MaxLength']) {
