@@ -1,4 +1,4 @@
-import { Account } from '../../modules/authentication/domain/entities/Account'
+import { AccountDto } from '@modules/shared/presentation/dto/AccountDto'
 
 export interface ClientResult<T> {
   status: number
@@ -12,9 +12,9 @@ export enum clientErrorMessages {
 }
 
 export interface IAuthenticationClient {
-  getAccountByEmail: (email: string) => Promise<Account>
-  createAccount(account: Account): Promise<ClientResult<Account>>
+  getAccountByEmail: (email: string) => Promise<AccountDto>
+  createAccount(account: AccountDto): Promise<ClientResult<AccountDto>>
   login(email: string, password: string): Promise<ClientResult<string>>
   deleteAccountByEmail: (email: string) => Promise<boolean>
-  getAllAccounts: () => Promise<Array<Account>>
+  getAllAccounts(): Promise<AccountDto[]> 
 }

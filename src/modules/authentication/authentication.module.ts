@@ -2,7 +2,7 @@ import { InfrastructureInjectionList } from '@infrastructure/InfrastructureInjec
 import { Module } from '@nestjs/common'
 import { InfrastructureModule } from '../../infrastructure/infrastructure.module'
 import { AuthenticationInjectionList } from './AuthenticationInjectionList'
-import { AuthenticationController } from './presentation/authentication.controller'
+import { AuthenticationController } from './presentation/AuthenticationController'
 
 @Module({
   imports: [InfrastructureModule],  

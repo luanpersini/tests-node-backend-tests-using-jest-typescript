@@ -1,4 +1,5 @@
 import { BadRequestException } from '@nestjs/common/exceptions'
+import * as crypto from 'crypto'
 import { Address } from '../types/Address'
 
 export type AccountParams = {
@@ -9,6 +10,7 @@ export type AccountParams = {
   address: Address
 }
 export class Account {
+  readonly id: string
   readonly name: string
   readonly email: string
   readonly age: number
@@ -18,13 +20,13 @@ export class Account {
   constructor(properties: AccountParams) {
     Object.assign(this, properties)
     this.validatePassword()
+    this.id = crypto.randomUUID()
   }
-  
+
   //this could also be done by a validationPipe
   validatePassword() {
-    if(this.password === '1234'){
+    if (this.password === '1234') {
       throw new BadRequestException('password too weak')
     }
-  } 
-
+  }
 }

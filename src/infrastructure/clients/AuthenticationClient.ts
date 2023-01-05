@@ -1,11 +1,12 @@
 import { EnumCountry } from '@modules/authentication/presentation/dtos/enums/EnumCountry'
+import { AccountDto } from '@modules/shared/presentation/dto/AccountDto'
 import { Injectable } from '@nestjs/common'
-import { Account } from '../../modules/authentication/domain/entities/Account'
 import { clientErrorMessages, ClientResult, IAuthenticationClient } from './IAuthenticationClient'
 
 //Fake client adapter simulating requests to a third party authentication API
 
-export const accountAuthClientMock1 = {
+export const account1: AccountDto = {
+  id: 'bd10c4e7-6385-41a6-a9d1-90c0ee80db0d',
   name: 'Name One',
   email: 'one@mail.com', 
   age: 11,
@@ -16,7 +17,8 @@ export const accountAuthClientMock1 = {
   }
 }
 
-export const accountAuthClientMock2 = {
+export const account2: AccountDto = {
+  id: 'e77b7a0a-b26e-438d-8bff-d6160c98fb4a',
   name: 'Name Two',
   email: 'two@mail.com',  
   password: 'user2',
@@ -26,18 +28,16 @@ export const accountAuthClientMock2 = {
   }
 }
 
-export const account1 = new Account(accountAuthClientMock1)
-export const account2 = new Account(accountAuthClientMock2)
-
-const accounts: Array<Account> = [account1, account2]
+const accounts: AccountDto[] = [account1, account2]
 
 
 @Injectable()
 export class AuthenticationClient implements IAuthenticationClient {
-  async getAccountByEmail(email: string): Promise<Account> {
+  async getAccountByEmail(email: string): Promise<AccountDto> {
     return accounts.find((account) => account.email === email)
   }
-  async createAccount(account: Account): Promise<ClientResult<Account>> {
+  
+  async createAccount(account: AccountDto): Promise<ClientResult<AccountDto>> {
     const accountExists = await this.getAccountByEmail(account.email)
     if (accountExists) {
       return {status: 400, data: clientErrorMessages.ACCOUNT_ALREADY_EXISTS}
@@ -67,7 +67,8 @@ export class AuthenticationClient implements IAuthenticationClient {
     return true    
   }
 
-  async getAllAccounts(): Promise<Array<Account>> {
+  // TODO replace Account for a DTO
+  async getAllAccounts(): Promise<AccountDto[]> {
     return Promise.resolve(accounts)
   }
 }

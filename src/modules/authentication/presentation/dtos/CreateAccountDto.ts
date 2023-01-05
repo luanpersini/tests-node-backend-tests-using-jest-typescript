@@ -1,7 +1,7 @@
 import { IsEmail, IsInt, IsNotEmpty, IsNotEmptyObject, IsNumber, IsObject, IsPositive, IsString, Max, MaxLength, Min, MinLength, ValidateNested } from 'class-validator'
 
 import { Type } from 'class-transformer'
-import { AddressDto } from './address.dto'
+import { AddressDto } from './AddressDto'
 
 export class CreateAccountDto {
   @IsString()
