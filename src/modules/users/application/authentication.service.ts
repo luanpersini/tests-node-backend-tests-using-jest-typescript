@@ -1,8 +1,8 @@
 import { BadRequestException, Inject, Injectable } from '@nestjs/common'
-import { ItemAlreadyExistsError } from '../../api/errors/itemAlreadyExists.error'
-import { IAuthenticationClient } from '../../infrastructure/clients/IAuthenticationClient'
-import { CreateAccountDto } from './domain/dto/createAccount.dto'
-import { Account } from './domain/entities/Account'
+import { IAuthenticationClient } from '../../../infrastructure/clients/IAuthenticationClient'
+import { Account } from '../domain/entities/Account'
+import { ItemAlreadyExistsError } from '../domain/errors/itemAlreadyExists.error'
+import { CreateAccountDto } from '../presentation/dto/createAccount.dto'
 
 @Injectable()
 export class AuthenticationService {

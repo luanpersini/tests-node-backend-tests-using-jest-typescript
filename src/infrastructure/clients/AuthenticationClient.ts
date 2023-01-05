@@ -1,7 +1,7 @@
-import { Account } from '../../modules/authentication/domain/entities/Account'
-import { EnumCountry } from '../../modules/authentication/domain/enums/EnumCountry'
-import { IAuthenticationClient } from './IAuthenticationClient'
 import { Injectable } from '@nestjs/common'
+import { Account } from '../../modules/authentication/domain/entities/Account'
+import { EnumCountry } from '../../modules/authentication/presentation/dto/enums/EnumCountry'
+import { IAuthenticationClient } from './IAuthenticationClient'
 
 export const accountAuthClientMock1 = {
   name: 'Name One',

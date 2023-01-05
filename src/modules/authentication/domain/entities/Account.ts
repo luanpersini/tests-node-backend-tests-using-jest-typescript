@@ -1,4 +1,4 @@
-import { Address } from '../interfaces/Address'
+import { Address } from '../../presentation/dto/types/Address'
 
 export class Account {
   private name: string

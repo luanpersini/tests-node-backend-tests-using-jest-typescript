@@ -3,15 +3,15 @@ import * as request from 'supertest'
 import { INestApplication, ValidationPipe } from '@nestjs/common'
 import { createAccountDtoParams, makeCreateAccountRequestData, makeDtoParams } from './register.e2e-data'
 
+import { faker } from '@faker-js/faker'
+import { Test } from '@nestjs/testing'
+import { Server } from 'http'
 import { AuthenticationClient } from '../../../src/infrastructure/clients/AuthenticationClient'
 import { AuthenticationModule } from '../../../src/modules/authentication/authentication.module'
-import { ItemAlreadyExistsError } from '../../../src/api/errors/itemAlreadyExists.error'
-import { Server } from 'http'
-import { Test } from '@nestjs/testing'
-import { faker } from '@faker-js/faker'
+import { ItemAlreadyExistsError } from '../../../src/modules/authentication/domain/errors/itemAlreadyExists.error'
+import { zipCodeLenghtMessage } from '../../../src/modules/authentication/presentation/dto/address.dto'
 import { makeDtoTestParams } from '../../__resources__/testHelpers/dtoTestParamsFactory'
 import { standardDtoTests } from '../../__resources__/testHelpers/standardDtoTests'
-import { zipCodeLenghtMessage } from '../../../src/modules/authentication/domain/dto/address.dto'
 
 // SUT = Subject Under Test
 let app: INestApplication

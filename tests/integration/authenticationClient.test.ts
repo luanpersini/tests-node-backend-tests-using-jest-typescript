@@ -1,10 +1,10 @@
 /* eslint-disable @typescript-eslint/no-empty-function */
 
-import { AuthenticationClient, account1, account2, accountAuthClientMock1 } from '../../src/infrastructure/clients/AuthenticationClient'
+import { account1, account2, accountAuthClientMock1, AuthenticationClient } from '../../src/infrastructure/clients/AuthenticationClient'
 
-import { Account } from '../../src/modules/authentication/domain/entities/Account'
-import { CreateAccountDto } from '../../src/modules/authentication/domain/dto/createAccount.dto'
 import { IAuthenticationClient } from '../../src/infrastructure/clients/IAuthenticationClient'
+import { Account } from '../../src/modules/authentication/domain/entities/Account'
+import { CreateAccountDto } from '../../src/modules/authentication/presentation/dto/createAccount.dto'
 import { createAccountDtoMock } from '../__resources__/mocks/authentication.mocks'
 
 let sut: IAuthenticationClient

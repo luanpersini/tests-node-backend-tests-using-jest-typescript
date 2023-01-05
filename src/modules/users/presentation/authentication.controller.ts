@@ -1,6 +1,6 @@
 import { Body, Controller, Get, Post } from '@nestjs/common'
-import { AuthenticationService } from './authentication.service'
-import { CreateAccountDto } from './domain/dto/createAccount.dto'
+import { AuthenticationService } from '../application/authentication.service'
+import { CreateAccountDto } from './dto/createAccount.dto'
 
 
 @Controller()
@@ -9,8 +9,8 @@ export class AuthenticationController {
     private readonly authenticationService: AuthenticationService
   ) {}
 
-  @Post('/register')
-  async register(@Body() body: CreateAccountDto) {
+  @Post('/signup')
+  async signup(@Body() body: CreateAccountDto) {
     return await this.authenticationService.createAccount(body)
   }
 

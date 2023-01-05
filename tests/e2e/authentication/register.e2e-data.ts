@@ -1,4 +1,4 @@
-import { EnumCountry } from '../../../src/modules/authentication/domain/enums/EnumCountry'
+import { EnumCountry } from '../../../src/modules/authentication/presentation/dto/enums/EnumCountry'
 
 //mock data and test factories
 const dtoParams = {}

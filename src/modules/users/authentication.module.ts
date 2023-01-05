@@ -1,7 +1,7 @@
 import { Module } from '@nestjs/common'
 import { AuthenticationClient } from '../../infrastructure/clients/AuthenticationClient'
 import { InfrastructureModule } from '../../infrastructure/infrastructure.module'
-import { AuthenticationService } from './application/AuthenticationService'
+import { AuthenticationService } from './application/authentication.service'
 import { AuthenticationController } from './presentation/authentication.controller'
 
 @Module({

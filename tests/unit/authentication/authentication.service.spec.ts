@@ -2,13 +2,13 @@
 
 import { throwError, throwReject } from '../../__resources__/testHelpers/testHelper'
 
-import { Account } from '../../../src/modules/authentication/domain/entities/Account'
-import { AuthenticationService } from '../../../src/modules/authentication/authentication.service'
 import { BadRequestException } from '@nestjs/common'
-import { CreateAccountDto } from '../../../src/modules/authentication/domain/dto/createAccount.dto'
-import { ItemAlreadyExistsError } from '../../../src/api/errors/itemAlreadyExists.error'
-import { authenticationClientMock } from '../../__resources__/mocks/authenticationClientMock'
+import { AuthenticationService } from '../../../src/modules/authentication/application/AuthenticationService'
+import { Account } from '../../../src/modules/authentication/domain/entities/Account'
+import { ItemAlreadyExistsError } from '../../../src/modules/authentication/domain/errors/itemAlreadyExists.error'
+import { CreateAccountDto } from '../../../src/modules/authentication/presentation/dto/createAccount.dto'
 import { createAccountDtoMock } from '../../__resources__/mocks/authentication.mocks'
+import { authenticationClientMock } from '../../__resources__/mocks/authenticationClientMock'
 
 let sut: AuthenticationService
 let createAccountDto: CreateAccountDto
