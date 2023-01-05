@@ -1,18 +1,15 @@
+import { InfrastructureInjectionList } from '@infrastructure/InfrastructureInjectionList'
 import { Module } from '@nestjs/common'
-import { AuthenticationClient } from '../../infrastructure/clients/AuthenticationClient'
 import { InfrastructureModule } from '../../infrastructure/infrastructure.module'
-import { AuthenticationService } from './application/AuthenticationService'
+import { AuthenticationInjectionList } from './AuthenticationInjectionList'
 import { AuthenticationController } from './presentation/authentication.controller'
 
 @Module({
   imports: [InfrastructureModule],  
   controllers: [AuthenticationController],
   providers: [
-    AuthenticationService,
-    {
-      provide: 'IAuthenticationClient',
-      useClass: AuthenticationClient
-    }
+   AuthenticationInjectionList.AUTHENTICATION_SERVICE,
+   InfrastructureInjectionList.AUTHENTICATION_CLIENT
   ]
 })
 export class AuthenticationModule {}

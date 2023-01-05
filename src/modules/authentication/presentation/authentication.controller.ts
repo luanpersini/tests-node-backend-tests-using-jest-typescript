@@ -1,12 +1,14 @@
-import { Body, Controller, Get, Post } from '@nestjs/common'
-import { AuthenticationService } from '../application/AuthenticationService'
-import { CreateAccountDto } from './dto/createAccount.dto'
-
+import { Body, Controller, Inject, Post } from '@nestjs/common'
+import { IAuthenticationService } from '../application/IAuthenticationService'
+import { AuthenticationInjectionList } from '../AuthenticationInjectionList'
+import { CreateAccountDto } from './dtos/CreateAccountDto'
+import { LoginDto } from './dtos/LoginDto'
 
 @Controller()
 export class AuthenticationController {
   constructor(
-    private readonly authenticationService: AuthenticationService
+    @Inject(AuthenticationInjectionList.AUTHENTICATION_SERVICE.provide)
+    private readonly authenticationService: IAuthenticationService
   ) {}
 
   @Post('/signup')
@@ -14,9 +16,9 @@ export class AuthenticationController {
     return await this.authenticationService.createAccount(body)
   }
 
-  @Get('/login')
-  async login() {
-    return await this.authenticationService.login()
+  @Post('/login')
+  async login(@Body() body: LoginDto) {
+    return await this.authenticationService.login(body)
   }
 
 }
