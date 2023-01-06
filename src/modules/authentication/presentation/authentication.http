@@ -21,9 +21,3 @@ content-type: application/json
     "email": "email@email.com",
     "password": "12345"    
 }
-
-###
-GET http://localhost:3003/getAllAccounts
-content-type: application/json
-
-{}

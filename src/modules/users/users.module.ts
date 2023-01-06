@@ -8,7 +8,7 @@ import { UsersInjectionList } from './UsersInjectionList'
   imports: [InfrastructureModule],  
   controllers: [UsersController],
   providers: [
-    UsersInjectionList.AUTHENTICATION_SERVICE,
+    UsersInjectionList.USERS_SERVICE,
     InfrastructureInjectionList.AUTHENTICATION_CLIENT
   ]
 })

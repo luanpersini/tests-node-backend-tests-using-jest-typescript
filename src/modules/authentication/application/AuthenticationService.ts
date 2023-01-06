@@ -1,9 +1,9 @@
 import { InfrastructureInjectionList } from '@infrastructure/InfrastructureInjectionList'
+import { AccountDto } from '@modules/shared/presentation/dto/AccountDto'
 import { BadRequestException, Inject, Injectable, InternalServerErrorException } from '@nestjs/common'
-import { IAuthenticationClient } from '../../../infrastructure/clients/IAuthenticationClient'
+import { IAuthenticationClient } from '../../shared/infrastructure/IAuthenticationClient'
 import { Account } from '../domain/entities/Account'
 import { AuthenticationErrorMessages } from '../domain/errors/AuthenticationErrorMessages'
-import { ItemAlreadyExistsError } from '../domain/errors/itemAlreadyExists.error'
 import { CreateAccountDto } from '../presentation/dtos/CreateAccountDto'
 import { LoginDto } from '../presentation/dtos/LoginDto'
 import { IAuthenticationService } from './IAuthenticationService'
@@ -15,15 +15,13 @@ export class AuthenticationService implements IAuthenticationService {
     private readonly authenticationClient: IAuthenticationClient
   ) {}
 
-  async createAccount(body: CreateAccountDto): Promise<Account> {
+  async createAccount(body: CreateAccountDto): Promise<AccountDto> {
     this.validateZipCode(body)
     const newAccount = await this.authenticationClient.createAccount(new Account(body))
-    if (newAccount.status === 200) return newAccount.data as Account
+    
+    if (newAccount) return newAccount
 
-    if (newAccount?.status === 400) {
-      throw new BadRequestException(new ItemAlreadyExistsError('Account', 'Email'))
-    }
-    throw new InternalServerErrorException(AuthenticationErrorMessages.AUTHENTICATION_CLIENT_ERROR)
+    throw new InternalServerErrorException(AuthenticationErrorMessages.SIGNUP_ERROR)
   }
 
   //Useless business method created to simulate Throw - Reject on tests (authentication.service.spec.ts)
@@ -42,13 +40,8 @@ export class AuthenticationService implements IAuthenticationService {
   async login(body: LoginDto): Promise<string> {
     const login = await this.authenticationClient.login(body.email, body.password)
 
-    if (login?.status === 200) {
-      return login.data
-    }
-
-    if (login?.status === 400) {
-      throw new BadRequestException(AuthenticationErrorMessages.INVALID_CREDENTIALS)
-    }
-    throw new InternalServerErrorException(AuthenticationErrorMessages.AUTHENTICATION_CLIENT_ERROR)
+    if (login) return login
+    
+    throw new InternalServerErrorException(AuthenticationErrorMessages.LOGIN_ERROR)
   }
 }
