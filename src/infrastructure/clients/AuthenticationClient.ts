@@ -1,3 +1,4 @@
+import { Account } from '@modules/authentication/domain/entities/Account'
 import { EnumCountry } from '@modules/authentication/presentation/dtos/enums/EnumCountry'
 import { AccountDto } from '@modules/shared/presentation/dto/AccountDto'
 import { BadRequestException, Injectable } from '@nestjs/common'
@@ -30,16 +31,16 @@ export const account2: AccountDto = {
   }
 }
 
-const accounts: AccountDto[] = [account1, account2]
+const accounts: AccountDto[] = [new Account(account1), new Account(account2)]
 
 const loginTokens: string[] = []
 @Injectable()
 export class AuthenticationClient implements IAuthenticationClient {
-  async createAccount(account: AccountDto): Promise<AccountDto> {
+  async createAccount(account: AccountDto): Promise<AccountDto> {    
     const accountExists = await this.getAccountByEmail(account.email)
     if (accountExists) {
       throw new BadRequestException(ClientErrorMessages.ACCOUNT_ALREADY_EXISTS)
-    }
+    }  
     accounts.push(account)
     return account
   }
@@ -56,9 +57,9 @@ export class AuthenticationClient implements IAuthenticationClient {
 
   async validateLogin(loginToken: string): Promise<boolean> {
     const isLoggedIn = loginTokens.find((token) => token === loginToken)
-    
+
     if (isLoggedIn) return true
-    
+
     return false
   }
 
@@ -72,5 +73,16 @@ export class AuthenticationClient implements IAuthenticationClient {
 
   async getAccountById(id: string): Promise<AccountDto> {
     return accounts.find((account) => account.id === id)
+  }
+
+  
+  async deleteAccountByEmail(email: string): Promise<boolean> {
+    const accountExists = await this.getAccountByEmail(email)   
+    if(!accountExists){
+      return false      
+    }
+
+    accounts.splice(accounts.indexOf(accountExists), 1)
+    return true    
   }
 }

@@ -12,4 +12,5 @@ export interface IAuthenticationClient {
   getAllAccounts(): Promise<AccountDto[]> 
   getAccountByEmail(email: string): Promise<AccountDto>
   getAccountById(id: string): Promise<AccountDto>
+  deleteAccountByEmail(email: string): Promise<boolean>
 }

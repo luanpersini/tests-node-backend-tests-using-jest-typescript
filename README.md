@@ -133,11 +133,9 @@ Some examples of integration tests:
 
 End-to-end tests are focused in testing a entire process flow.
 
-In APIs, that consist in making a request and getting the expected response depending in the scenario tested.
+In APIs, that consist in making a request and getting the expected response depending in the usecase tested.
 
-E2E tests should cover all business rules and all validations. The business rules are usually in the usecases (services) and the validations in the controller. 
-
-Most of the business rules test scenarios are **returns** and **throws** in the usecase.
+E2E tests should cover all business rules and all validations. The business rules are usually located in the usecases (services) or command handlers, while the validations may be found the controllers and sometimes inside a domain entity. Its wise to test / pay attention to every **return** , **throw** inside those files.
 
 Example:
 
