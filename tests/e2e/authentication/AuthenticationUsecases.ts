@@ -16,7 +16,7 @@ export const userLogin = async (requestData?: any) => {
   return await request(server).post('/login').send(data)
 }
 
-// Used for every test who need a registered and loged in user to work
+// Used for any test that requires a registered and logged in user to work
 export const setupAuthenticatedTestData = async () => {
   await initServer()
   await userSignup()
@@ -25,18 +25,16 @@ export const setupAuthenticatedTestData = async () => {
   await app.close()
 }
 
-const FORBIDDEN_RESOURCE = 'Forbidden resource'
 
 /**
  * Check if the route is protected by @UseGuards(AuthenticationGuard)
- * 
  *  
  */
 export function routeHasAuthenticationGuardTest(execSut: any): void {
   test('should return **Bad Request** if the loginToken is wrong.', async () => {
     const { status, body } = await execSut({ id: loginResult.id, loginToken: 'wrong_token' })
 
-    expect(body.message).toBe(FORBIDDEN_RESOURCE)
+    expect(body.message).toBe('Forbidden resource')
     expect(status).toBe(403)
   })
 }

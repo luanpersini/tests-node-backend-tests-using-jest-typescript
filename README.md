@@ -2,13 +2,58 @@
 
 # Objectives
 
-The main objective of this project is to keep it as a knowledge base about backend testing, including tips and test examples, covering the majority of the most common use cases with unit, integration, and end-to-end tests.
+The main objective of this project is to be kept as a knowledge base about backend testing, including tips and test examples, covering the majority of the most common use cases with unit, integration, and end-to-end tests.
+
+<br>
+
+**NOTES** - This repository was refactored (10 Jan 2023) to add more complexity to the tests and to serve as backend to the Cypress tests repository. If you need unit tests, check an older version for it (before 1 Dez 2022. I will add new unit tests when i have time)
+
+In the refactor i've added an AuthenticationGuard to the UsersController, forcing the consumer to be authenticated to retrieve the users data. The end-to-end tests in this api now have files called usecases (AuthenticationUsecases and UsersUsecases). These usecases are like lego pieces that can be assembled to create multiple test scenarios with ease.
+
+<br>
+
+```
+export const authenticatedUserData = makeSignupRequestData()
+export let loginResult: LoginResultDto = undefined
+
+export const userSignup = async (requestData?: any) => {
+  const data = requestData ?? authenticatedUserData
+  return await request(server).post('/signup').send(data)
+}
+
+export const userLogin = async (requestData?: any) => {
+  const data = requestData ?? { email: authenticatedUserData.email, password: authenticatedUserData.password }
+  return await request(server).post('/login').send(data)
+}
+
+// Used for any test that requires a registered and logged in user to work
+export const setupAuthenticatedTestData = async () => {
+  await initServer()
+  await userSignup()
+  const login = await userLogin()
+  loginResult = login.body
+  await app.close()
+}
+
+```
+
+
+And this setup can be used as follows
+
+
+```
+describe('Authentication End-To-End Tests', () => {
+  beforeEach(async () => {
+    await setupAuthenticatedTestData()
+  })
+
+```
 
 </br>
 
 **Application**
 
-The application is an authentication API with studies purpose only, where you call a third party authentication service (scr/infrastructure/AuthenticationClient). A fake service was made for the authentication client using an Array of Objects. This app has an authentication route (/register), where a new account can be created and a route to retrieve all accounts (/getAllAccounts). 
+The application is an authentication API with studies purpose only, where you call a third party authentication service (scr/infrastructure/AuthenticationClient). A fake service was made for the authentication client using an Array of Objects. This app has an authentication route (/signup), where a new account can be created, a login route (/login) and two routes, one to retrieve all accounts (/users) and one to retrieve a single account (/users/:id). 
 
 
 ## Structure
@@ -41,16 +86,18 @@ Test files:
 ###  To reach the endpoints:
 
 1. If youre using vsCode, install the extension REST Client : https://marketplace.visualstudio.com/items?itemName=humao.rest-client
-1. go to ``src/modules/authentication/authentication.http`` and send the requests
-
+1. go to ``src/modules/authentication/presentation/authentication.http`` and send the requests
+1. You must create an account and log into the system to make requests in the users module.
+    - ``src/modules/users/presentation/users.http`` 
 
 ```
-POST http://localhost:3003/register
+POST http://localhost:3003/signup
 content-type: application/json
 
 {
     "name": "Test name",
     "email": "email@email.com",
+    "password": "12345",
     "age": 9,
     "address": {
        "country": "BR",
@@ -58,12 +105,6 @@ content-type: application/json
     }
 }
 
-###
-
-GET http://localhost:3003/getAllAccounts
-content-type: application/json
-
-{}
 ```
 
 </br>
