@@ -4,7 +4,7 @@ import { authenticatedUserData, routeHasAuthenticationGuardTest, setupAuthentica
 import { getAllAccounts } from './UsersUsecases'
 
 // SUT = Subject Under Test
-const execSut = () => getAllAccounts()
+const execSut = (params?: any) => getAllAccounts(params)
 
 describe('Authentication End-To-End Tests', () => {
   beforeEach(async () => {
