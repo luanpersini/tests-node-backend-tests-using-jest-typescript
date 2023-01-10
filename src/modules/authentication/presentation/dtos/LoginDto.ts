@@ -1,6 +1,11 @@
 import { IsEmail, IsNotEmpty, IsString, MaxLength, MinLength } from 'class-validator'
 
 
+export type LoginResultDto = {
+  id: string
+  loginToken: string
+}
+
 export class LoginDto {
   @IsString()
   @IsNotEmpty()

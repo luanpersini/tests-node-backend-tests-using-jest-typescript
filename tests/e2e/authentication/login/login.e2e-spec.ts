@@ -48,7 +48,7 @@ describe('Authentication End-To-End Tests', () => {
 
       test('should return **OK** with the login token on success', async () => {
         const { status, body } = await execSut()
-        expect(body).toEqual({ loginToken: expect.any(String) })
+        expect(body).toEqual({ loginToken: expect.any(String), id: expect.any(String) })
         expect(status).toBe(201)
       })
     })

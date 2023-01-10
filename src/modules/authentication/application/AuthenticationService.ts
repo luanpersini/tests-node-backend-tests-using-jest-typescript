@@ -5,7 +5,7 @@ import { IAuthenticationClient } from '../../shared/infrastructure/IAuthenticati
 import { Account } from '../domain/entities/Account'
 import { AuthenticationErrorMessages } from '../domain/errors/AuthenticationErrorMessages'
 import { CreateAccountDto } from '../presentation/dtos/CreateAccountDto'
-import { LoginDto } from '../presentation/dtos/LoginDto'
+import { LoginDto, LoginResultDto } from '../presentation/dtos/LoginDto'
 import { IAuthenticationService } from './IAuthenticationService'
 
 @Injectable()
@@ -37,10 +37,10 @@ export class AuthenticationService implements IAuthenticationService {
     }
   }
 
-  async login(body: LoginDto): Promise<{ loginToken: string }> {
-    const loginToken = await this.authenticationClient.login(body.email, body.password)
+  async login(body: LoginDto): Promise<LoginResultDto> {
+    const loginResult = await this.authenticationClient.login(body.email, body.password)
 
-    if (loginToken) return { loginToken }
+    if (loginResult) return loginResult
 
     throw new InternalServerErrorException(AuthenticationErrorMessages.LOGIN_ERROR)
   }

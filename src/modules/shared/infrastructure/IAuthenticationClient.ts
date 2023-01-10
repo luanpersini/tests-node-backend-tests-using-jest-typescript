@@ -1,3 +1,4 @@
+import { LoginResultDto } from '@modules/authentication/presentation/dtos/LoginDto'
 import { AccountDto } from '@modules/shared/presentation/dto/AccountDto'
 
 export interface ClientResult<T> {
@@ -7,7 +8,7 @@ export interface ClientResult<T> {
 
 export interface IAuthenticationClient {  
   createAccount(account: AccountDto): Promise<AccountDto>
-  login(email: string, password: string): Promise<string> 
+  login(email: string, password: string): Promise<LoginResultDto> 
   validateLogin(loginToken: string): Promise<boolean>
   getAllAccounts(): Promise<AccountDto[]> 
   getAccountByEmail(email: string): Promise<AccountDto>

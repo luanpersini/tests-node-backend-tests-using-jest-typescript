@@ -1,5 +1,6 @@
 import { Account } from '@modules/authentication/domain/entities/Account'
 import { EnumCountry } from '@modules/authentication/presentation/dtos/enums/EnumCountry'
+import { LoginResultDto } from '@modules/authentication/presentation/dtos/LoginDto'
 import { AccountDto } from '@modules/shared/presentation/dto/AccountDto'
 import { BadRequestException, Injectable } from '@nestjs/common'
 import * as crypto from 'node:crypto'
@@ -8,8 +9,7 @@ import { ClientErrorMessages } from './ClientErrorMessages'
 
 //Fake client adapter simulating requests to a third party authentication API
 
-export const account1: AccountDto = {
-  id: 'bd10c4e7-6385-41a6-a9d1-90c0ee80db0d',
+export const account1 = {
   name: 'Name One',
   email: 'one@mail.com',
   age: 11,
@@ -20,8 +20,7 @@ export const account1: AccountDto = {
   }
 }
 
-export const account2: AccountDto = {
-  id: 'e77b7a0a-b26e-438d-8bff-d6160c98fb4a',
+export const account2 = {
   name: 'Name Two',
   email: 'two@mail.com',
   password: 'user2',
@@ -31,26 +30,28 @@ export const account2: AccountDto = {
   }
 }
 
-const accounts: AccountDto[] = [new Account(account1), new Account(account2)]
+export const authenticationClientAccountsStorage: AccountDto[] = [new Account(account1), new Account(account2)]
+
+const accounts = authenticationClientAccountsStorage
 
 const loginTokens: string[] = []
 @Injectable()
 export class AuthenticationClient implements IAuthenticationClient {
-  async createAccount(account: AccountDto): Promise<AccountDto> {    
+  async createAccount(account: AccountDto): Promise<AccountDto> {
     const accountExists = await this.getAccountByEmail(account.email)
     if (accountExists) {
       throw new BadRequestException(ClientErrorMessages.ACCOUNT_ALREADY_EXISTS)
-    }  
+    }
     accounts.push(account)
     return account
   }
 
-  async login(email: string, password: string): Promise<string> {
+  async login(email: string, password: string): Promise<LoginResultDto> {
     const account = await this.getAccountByEmail(email)
     if (account && account.password === password) {
       const loginToken = crypto.randomUUID() //Generate fake token for login
       loginTokens.push(loginToken)
-      return loginToken
+      return { loginToken, id: account.id }
     }
     throw new BadRequestException(ClientErrorMessages.INVALID_CREDENTIALS)
   }
@@ -72,17 +73,20 @@ export class AuthenticationClient implements IAuthenticationClient {
   }
 
   async getAccountById(id: string): Promise<AccountDto> {
-    return accounts.find((account) => account.id === id)
+    const accountExists = accounts.find((account) => account.id === id)
+    if (!accountExists) {
+      throw new BadRequestException(ClientErrorMessages.ACCOUNT_NOT_FOUND)
+    }
+    return accountExists
   }
 
-  
   async deleteAccountByEmail(email: string): Promise<boolean> {
-    const accountExists = await this.getAccountByEmail(email)   
-    if(!accountExists){
-      return false      
+    const accountExists = await this.getAccountByEmail(email)
+    if (!accountExists) {
+      return false
     }
 
     accounts.splice(accounts.indexOf(accountExists), 1)
-    return true    
+    return true
   }
 }

@@ -11,16 +11,15 @@ export class UsersController {
     @Inject(UsersInjectionList.USERS_SERVICE.provide)
     private readonly usersService: IUsersService
   ) {}
-
-  @Get('/:id')
-  async getAccountByEmail(@Param() { id }: UuidDto) {
-    // return await this.userService.createAccount(body)
-    return {}
-  }
-
+ 
   @Get()
   async getAllAccounts() {
     return await this.usersService.listAllUsers()
+  }
+
+  @Get('/:id')
+  async getAccountByEmail(@Param() { id }: UuidDto) {
+    return await this.usersService.getUserById(id) 
   }
 
 }

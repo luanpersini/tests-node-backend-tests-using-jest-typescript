@@ -15,9 +15,8 @@ export class UsersService implements IUsersService {
     return await this.authenticationClient.getAllAccounts()
   } 
 
-  async getUserById(id: string): Promise<AccountDto> {
-    const account = await this.authenticationClient.getAccountById(id)    
-    return 
+  async getUserById(id: string): Promise<AccountDto> {    
+    return await this.authenticationClient.getAccountById(id)  
   } 
 
 }
