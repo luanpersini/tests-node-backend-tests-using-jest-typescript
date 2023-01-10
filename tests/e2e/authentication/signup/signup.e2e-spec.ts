@@ -1,5 +1,6 @@
 import { faker } from '@faker-js/faker'
 import { ClientErrorMessages } from '@infrastructure/clients/ClientErrorMessages'
+import { AuthenticationErrorMessages } from '@modules/authentication/domain/errors/AuthenticationErrorMessages'
 import { zipCodeLenghtMessage } from '@modules/authentication/presentation/dtos/AddressDto'
 import { app, initServer, testService } from 'tests/resources/TestServer'
 import { makeDtoTestParams } from '../../../resources/testHelpers/dtoTestParamsFactory'
@@ -53,13 +54,16 @@ describe('Authentication End-To-End Tests', () => {
         expect(status).toBe(400)        
       })
 
-      test('should return **OK** with the created account on success', async () => {
+      test('should return **BadRequest** if (password) is weak', async () => {
+        requestData.password = '1234'
+
         const { status, body } = await execSut()
-        expect(body).toEqual({...requestData, id: expect.any(String)})
-        expect(status).toBe(201)        
+             
+        expect(body.message).toContain(AuthenticationErrorMessages.PASSWORD_TOO_WEAK)
+        expect(status).toBe(400)        
       })
 
-      test('should return **OK** with the created account on success 2', async () => {
+      test('should return **OK** with the created account on success', async () => {
         const { status, body } = await execSut()
         expect(body).toEqual({...requestData, id: expect.any(String)})
         expect(status).toBe(201)        
