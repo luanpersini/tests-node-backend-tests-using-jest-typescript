@@ -18,7 +18,7 @@ export class AuthenticationService implements IAuthenticationService {
   async createAccount(body: CreateAccountDto): Promise<AccountDto> {
     this.validateZipCode(body)
     const newAccount = await this.authenticationClient.createAccount(new Account(body))
-    
+
     if (newAccount) return newAccount
 
     throw new InternalServerErrorException(AuthenticationErrorMessages.SIGNUP_ERROR)
@@ -37,11 +37,11 @@ export class AuthenticationService implements IAuthenticationService {
     }
   }
 
-  async login(body: LoginDto): Promise<string> {
-    const login = await this.authenticationClient.login(body.email, body.password)
+  async login(body: LoginDto): Promise<{ loginToken: string }> {
+    const loginToken = await this.authenticationClient.login(body.email, body.password)
 
-    if (login) return login
-    
+    if (loginToken) return { loginToken }
+
     throw new InternalServerErrorException(AuthenticationErrorMessages.LOGIN_ERROR)
   }
 }

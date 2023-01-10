@@ -3,14 +3,14 @@ import { app, initServer, server } from '../../resources/TestServer'
 import { makeSignupRequestData } from './signup/signup.e2e-data'
 
 export const userData = makeSignupRequestData()
-export let authenticationToken = ''
+export let loginToken = ''
 
 export const userSignup = async (requestData?: any) => {
   const data = requestData ?? userData
   return await request(server).post('/signup').send(data)
 }
 
-export const login = async (requestData?: any) => {
+export const userLogin = async (requestData?: any) => {
   const data = requestData ?? { email: userData.email, password: userData.password }
   return await request(server).post('/login').send(data)
 }
@@ -19,7 +19,7 @@ export const login = async (requestData?: any) => {
 export const setupAuthenticatedTestData = async () => {
   await initServer(false)  
   await userSignup()  
-  const loginResult = await login()
-  authenticationToken = loginResult.body  
+  const loginResult = await userLogin()
+  loginToken = loginResult.body  
   await app.close()
 }

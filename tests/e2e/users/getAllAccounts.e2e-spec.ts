@@ -1,11 +1,10 @@
 import * as request from 'supertest'
 
 import { INestApplication, ValidationPipe } from '@nestjs/common'
-import { account1, account2 } from '../../../src/infrastructure/clients/AuthenticationClient'
-
 import { Test } from '@nestjs/testing'
 import { Server } from 'http'
-import { AuthenticationModule } from '../../../src/modules/authentication/authentication.module'
+import { account1, account2 } from 'src/infrastructure/clients/AuthenticationClient'
+import { AuthenticationModule } from 'src/modules/authentication/authentication.module'
 
 // SUT = Subject Under Test
 let app: INestApplication
