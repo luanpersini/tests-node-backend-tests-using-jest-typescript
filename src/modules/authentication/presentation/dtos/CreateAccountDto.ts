@@ -1,8 +1,6 @@
-import { IsEmail, IsNotEmpty, IsNotEmptyObject, IsObject, IsString, MaxLength, MinLength, ValidateNested } from 'class-validator'
+import { IsEmail, IsNotEmpty, IsNumberString, IsOptional, IsString, Length, MaxLength, MinLength } from 'class-validator'
 
-import { Type } from 'class-transformer'
-import { AddressDto } from './AddressDto'
-
+export const zipCodeLenghtMessage = 'zipCode must have exactly 8 characters.'
 export class CreateAccountDto {
   @IsString()
   @IsNotEmpty()
@@ -23,9 +21,10 @@ export class CreateAccountDto {
   @MaxLength(255)
   password: string
 
-  @IsObject()
-  @IsNotEmptyObject()
-  @ValidateNested()
-  @Type(() => AddressDto)
-  address: AddressDto
+  @IsOptional()
+  @IsString()  
+  @IsNotEmpty()
+  @IsNumberString()
+  @Length(8,8, {message: zipCodeLenghtMessage}) 
+  zipCode: string
 }

@@ -16,7 +16,7 @@ export class AuthenticationService implements IAuthenticationService {
   ) {}
 
   async createAccount(body: CreateAccountDto): Promise<AccountDto> {
-    this.validateZipCode(body)
+    this.validateZipCode(body.zipCode)
     const newAccount = await this.authenticationClient.createAccount(new Account(body))
 
     if (newAccount) return newAccount
@@ -26,12 +26,11 @@ export class AuthenticationService implements IAuthenticationService {
 
   //Useless business method created to simulate Throw - Reject on tests (authentication.service.spec.ts)
   //Also used to show how to test a private method
-  private validateZipCode(body: CreateAccountDto): void {
-    if (!body.address.zipCode) {
+  private validateZipCode(zipCode: string): void {
+    if (!zipCode) {
       console.log('Logger: no zipCode to validate.')
       return
-    }
-    const { zipCode } = body.address
+    }    
     if (zipCode === '99999999') {
       throw new BadRequestException(AuthenticationErrorMessages.INVALID_ZIPCODE)
     }

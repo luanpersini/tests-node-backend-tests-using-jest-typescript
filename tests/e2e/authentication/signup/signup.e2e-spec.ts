@@ -1,7 +1,7 @@
 import { faker } from '@faker-js/faker'
 import { ClientErrorMessages } from '@infrastructure/clients/ClientErrorMessages'
 import { AuthenticationErrorMessages } from '@modules/authentication/domain/errors/AuthenticationErrorMessages'
-import { zipCodeLenghtMessage } from '@modules/authentication/presentation/dtos/AddressDto'
+import { zipCodeLenghtMessage } from '@modules/authentication/presentation/dtos/CreateAccountDto'
 import { app, initServer, testService } from 'tests/resources/TestServer'
 import { makeDtoTestParams } from '../../../resources/testHelpers/dtoTestParamsFactory'
 import { standardDtoTests } from '../../../resources/testHelpers/standardDtoTests'
@@ -36,8 +36,8 @@ describe('Authentication End-To-End Tests', () => {
 
   describe('/signup', () => {
     describe('Business Rules', () => {
-      test('should return **BadRequest** if zipCode is invalid (address.zipCode = 99999999)', async () => {
-        requestData.address.zipCode = '99999999'
+      test('should return **BadRequest** if zipCode is invalid (zipCode = 99999999)', async () => {
+        requestData.zipCode = '99999999'
 
         const { status, body } = await execSut()
         
@@ -73,14 +73,14 @@ describe('Authentication End-To-End Tests', () => {
     describe('Dto Validation', () => {
       standardDtoTests(testParams, makeSignupRequestData, userSignup, {}, { okStatus: 201 })
 
-      test(`should return **Bad Request** if (address.zipcode) length is incorrect.`, async () => {
+      test(`should return **Bad Request** if (zipcode) length is incorrect.`, async () => {
         const length = 8
-        const message = 'address.' + zipCodeLenghtMessage
+        const message = zipCodeLenghtMessage
 
-        requestData.address.zipCode = faker.finance.account(length - 1)
+        requestData.zipCode = faker.finance.account(length - 1)
         await actAssert(message)
 
-        requestData.address.zipCode = faker.finance.account(length + 1)
+        requestData.zipCode = faker.finance.account(length + 1)
         await actAssert(message)
       })
     })

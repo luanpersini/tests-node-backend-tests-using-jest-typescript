@@ -1,5 +1,4 @@
 import { Account } from '@modules/authentication/domain/entities/Account'
-import { EnumCountry } from '@modules/authentication/presentation/dtos/enums/EnumCountry'
 import { LoginResultDto } from '@modules/authentication/presentation/dtos/LoginDto'
 import { AccountDto } from '@modules/shared/presentation/dto/AccountDto'
 import { BadRequestException, Injectable } from '@nestjs/common'
@@ -13,19 +12,13 @@ export const account1 = {
   name: 'Name One',
   email: 'one@mail.com',
   password: 'user1',
-  address: {
-    country: EnumCountry.BR,
-    zipCode: '12345678'
-  }
+  zipCode: '12345678'
 }
 
 export const account2 = {
   name: 'Name Two',
   email: 'two@mail.com',
-  password: 'user2',
-  address: {
-    country: EnumCountry.US
-  }
+  password: 'user2'
 }
 
 export const authenticationClientAccountsStorage: AccountDto[] = [new Account(account1), new Account(account2)]
