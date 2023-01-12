@@ -12,7 +12,6 @@ export const createAccountDtoMock: CreateAccountDto = {
   name: 'anyName',
   email: 'anyEmail',
   password: 'anyPassword',
-  age: 99,
   address: addressMock
 }
 

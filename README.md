@@ -97,8 +97,7 @@ content-type: application/json
 {
     "name": "Test name",
     "email": "email@email.com",
-    "password": "12345",
-    "age": 9,
+    "password": "12345",    
     "address": {
        "country": "BR",
        "zipCode": "99999991"

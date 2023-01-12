@@ -6,7 +6,6 @@ import { Address } from '../types/Address'
 export type AccountParams = {
   name: string
   email: string
-  age: number
   password: string
   address: Address
 }
@@ -14,7 +13,6 @@ export class Account {
   readonly id: string
   readonly name: string
   readonly email: string
-  readonly age: number
   readonly password: string
   readonly address: Address
 

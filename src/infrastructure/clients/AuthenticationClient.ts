@@ -12,7 +12,6 @@ import { ClientErrorMessages } from './ClientErrorMessages'
 export const account1 = {
   name: 'Name One',
   email: 'one@mail.com',
-  age: 11,
   password: 'user1',
   address: {
     country: EnumCountry.BR,
@@ -24,7 +23,6 @@ export const account2 = {
   name: 'Name Two',
   email: 'two@mail.com',
   password: 'user2',
-  age: 22,
   address: {
     country: EnumCountry.US
   }
