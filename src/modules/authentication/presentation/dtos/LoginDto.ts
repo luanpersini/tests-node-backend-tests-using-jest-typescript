@@ -1,9 +1,9 @@
 import { IsEmail, IsNotEmpty, IsString, MaxLength, MinLength } from 'class-validator'
 
-
 export type LoginResultDto = {
-  id: string
   loginToken: string
+  id: string
+  name: string
 }
 
 export class LoginDto {
@@ -13,9 +13,9 @@ export class LoginDto {
   @MinLength(5)
   @MaxLength(255)
   email: string
-  
+
   @IsString()
-  @IsNotEmpty()  
+  @IsNotEmpty()
   @MinLength(4)
   @MaxLength(255)
   password: string

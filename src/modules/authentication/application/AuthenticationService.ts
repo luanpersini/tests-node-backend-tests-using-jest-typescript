@@ -19,7 +19,10 @@ export class AuthenticationService implements IAuthenticationService {
     this.validateZipCode(body.zipCode)
     const newAccount = await this.authenticationClient.createAccount(new Account(body))
 
-    if (newAccount) return newAccount
+    if (newAccount) {
+      console.log('Logger: Account Created for user: ' + newAccount.email)      
+      return newAccount
+    }
 
     throw new InternalServerErrorException(AuthenticationErrorMessages.SIGNUP_ERROR)
   }
@@ -30,7 +33,7 @@ export class AuthenticationService implements IAuthenticationService {
     if (!zipCode) {
       console.log('Logger: no zipCode to validate.')
       return
-    }    
+    }
     if (zipCode === '99999999') {
       throw new BadRequestException(AuthenticationErrorMessages.INVALID_ZIPCODE)
     }

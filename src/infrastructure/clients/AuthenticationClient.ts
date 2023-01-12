@@ -17,8 +17,8 @@ export const account1 = {
 
 export const account2 = {
   name: 'Name Two',
-  email: 'two@mail.com',
-  password: 'user2'
+  email: 'any_email5@mail.com',
+  password: 'Secr&t123'
 }
 
 export const authenticationClientAccountsStorage: AccountDto[] = [new Account(account1), new Account(account2)]
@@ -42,7 +42,7 @@ export class AuthenticationClient implements IAuthenticationClient {
     if (account && account.password === password) {
       const loginToken = crypto.randomUUID() //Generate fake token for login
       loginTokens.push(loginToken)
-      return { loginToken, id: account.id }
+      return { loginToken, id: account.id, name: account.name }
     }
     throw new BadRequestException(ClientErrorMessages.INVALID_CREDENTIALS)
   }

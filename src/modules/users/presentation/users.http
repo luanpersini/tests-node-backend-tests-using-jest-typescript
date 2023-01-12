@@ -1,5 +1,5 @@
 GET http://localhost:3003/users
-Authorization: 50410911-af21-4435-a25a-2471c5f4b703
+Authorization: 66708c0d-5cea-4fde-a3df-23232acadb75
 content-type: application/json
 
 {}
