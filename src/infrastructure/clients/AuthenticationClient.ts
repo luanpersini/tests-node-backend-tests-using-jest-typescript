@@ -56,6 +56,10 @@ export class AuthenticationClient implements IAuthenticationClient {
   }
 
   async getAllAccounts(): Promise<AccountDto[]> {
+    accounts.map((account) => {
+      delete account.password
+      return account
+    })
     return Promise.resolve(accounts)
   }
 
