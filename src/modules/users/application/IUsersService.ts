@@ -1,6 +1,6 @@
-import { AccountDto } from '@modules/shared/presentation/dto/AccountDto'
+import { GetAccountResponseDto } from '../presentation/dto/getAccountResponseDto'
 
 export interface IUsersService {
-  listAllUsers(): Promise<AccountDto[]>
-  getUserById(id: string): Promise<AccountDto>
+  listAllUsers(): Promise<GetAccountResponseDto[]>
+  getUserById(id: string): Promise<GetAccountResponseDto>
 }

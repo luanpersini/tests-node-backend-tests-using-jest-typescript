@@ -1,6 +1,7 @@
 import { Account } from '@modules/authentication/domain/entities/Account'
 import { LoginResultDto } from '@modules/authentication/presentation/dtos/LoginDto'
 import { AccountDto } from '@modules/shared/presentation/dto/AccountDto'
+import { GetAccountResponseDto } from '@modules/users/presentation/dto/getAccountResponseDto'
 import { BadRequestException, Injectable } from '@nestjs/common'
 import * as crypto from 'node:crypto'
 import { IAuthenticationClient } from '../../modules/shared/infrastructure/IAuthenticationClient'
@@ -55,7 +56,7 @@ export class AuthenticationClient implements IAuthenticationClient {
     return false
   }
 
-  async getAllAccounts(): Promise<AccountDto[]> {
+  async getAllAccounts(): Promise<GetAccountResponseDto[]> {
     accounts.map((account) => {
       delete account.password
       return account
@@ -67,11 +68,12 @@ export class AuthenticationClient implements IAuthenticationClient {
     return accounts.find((account) => account.email === email)
   }
 
-  async getAccountById(id: string): Promise<AccountDto> {
+  async getAccountById(id: string): Promise<GetAccountResponseDto> {
     const accountExists = accounts.find((account) => account.id === id)
     if (!accountExists) {
       throw new BadRequestException(ClientErrorMessages.ACCOUNT_NOT_FOUND)
     }
+    delete accountExists.password
     return accountExists
   }
 

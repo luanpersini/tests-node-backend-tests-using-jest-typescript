@@ -1,7 +1,7 @@
 import { InfrastructureInjectionList } from '@infrastructure/InfrastructureInjectionList'
-import { AccountDto } from '@modules/shared/presentation/dto/AccountDto'
 import { Inject, Injectable } from '@nestjs/common'
 import { IAuthenticationClient } from '../../shared/infrastructure/IAuthenticationClient'
+import { GetAccountResponseDto } from '../presentation/dto/getAccountResponseDto'
 import { IUsersService } from './IUsersService'
 
 @Injectable()
@@ -11,11 +11,11 @@ export class UsersService implements IUsersService {
     private readonly authenticationClient: IAuthenticationClient
   ) {}
  
-  async listAllUsers(): Promise<AccountDto[]> {
+  async listAllUsers(): Promise<GetAccountResponseDto[]> {
     return await this.authenticationClient.getAllAccounts()
   } 
 
-  async getUserById(id: string): Promise<AccountDto> {    
+  async getUserById(id: string): Promise<GetAccountResponseDto> {    
     return await this.authenticationClient.getAccountById(id)  
   } 
 
