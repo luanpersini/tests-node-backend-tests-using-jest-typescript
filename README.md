@@ -8,7 +8,9 @@ The main objective of this project is to be kept as a knowledge base about backe
 
 **NOTES** - This repository was refactored (10 Jan 2023) to add more complexity to the tests and to serve as backend to the Cypress tests repository. If you need unit tests, check an older version for it (before 1 Dez 2022. I will add new unit tests when i have time)
 
-In the refactor i've added an AuthenticationGuard to the UsersController, forcing the consumer to be authenticated to retrieve the users data. The end-to-end tests in this api now have files called usecases (AuthenticationUsecases and UsersUsecases). These usecases are like lego pieces that can be assembled to create multiple test scenarios with ease.
+In the refactor i've added an AuthenticationGuard to the UsersController, forcing the consumer to be authenticated to retrieve the users data. 
+
+The end-to-end tests in this api now have files called usecases (AuthenticationUsecases and UsersUsecases). These usecases are like lego pieces that can be assembled to create multiple test scenarios with ease.
 
 <br>
 
