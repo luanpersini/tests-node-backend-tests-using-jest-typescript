@@ -108,7 +108,7 @@ content-type: application/json
 </br>
 
 
-# Tests
+# Test Concepts
 
 Some concepts and tips to have in mind when writing tests:
 
