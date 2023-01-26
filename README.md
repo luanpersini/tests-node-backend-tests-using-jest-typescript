@@ -1,4 +1,4 @@
-# Backend Testing - NodeJS/NestJS APIs
+# Backend Testing NodeJS/NestJS APIs Using Jest
 
 # Objectives
 
